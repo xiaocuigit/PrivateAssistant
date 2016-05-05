@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notes_item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:mrl_rippleColor="?attr/colorPrimary"
+    app:mrl_rippleOverlay="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.6"
+        android:background="@drawable/abc_popup_background_mtrl_mult"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/note_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="14"
+                android:paddingBottom="4dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="6dp"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/abc_text_size_medium_material"
+                tools:text="Label Text" />
+
+            <ImageButton
+                android:id="@+id/note_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_more_grey" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/note_content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingExtra="2dp"
+            android:maxLines="10"
+            android:padding="10dp"
+            android:textColor="#848484"
+            android:textSize="@dimen/abc_text_size_small_material" />
+
+        <TextView
+            android:id="@+id/note_last_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="6dp"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/abc_text_size_caption_material"
+            tools:text="2015-5-24:16:05" />
+    </LinearLayout>
+</com.balysv.materialripple.MaterialRippleLayout>
+

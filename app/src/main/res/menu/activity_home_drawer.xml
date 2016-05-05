@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="主页" />
+
+        <item
+            android:id="@+id/nav_private_note"
+            android:icon="@drawable/ic_lock__black_24dp"
+            android:title="加密笔记"/>
+        <item
+            android:id="@+id/nav_change_Theme"
+            android:icon="@drawable/ic_view_change_theme"
+            android:title="更改主题" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="设置" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_2x"
+                android:title="分享" />
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_person_outline_black_24dp"
+                android:title="注销" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AddAlarmItemView">
+        <attr name="mTitle" format="string" />
+        <attr name="mDesc" format="string" />
+    </declare-styleable>
+</resources>

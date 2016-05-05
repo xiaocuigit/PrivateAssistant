@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    android:layout_width="250sp"
+    android:layout_height="250sp">
+
+    <com.triggertrap.seekarc.SeekArc
+        android:id="@+id/seekArc"
+        android:layout_width="220sp"
+        android:layout_height="200sp"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        seekarc:rotation="180"
+        seekarc:startAngle="30"
+        seekarc:sweepAngle="300"
+        seekarc:touchInside="true"
+        />
+    <TextView
+        android:id="@+id/seekArcProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="0"
+        android:textSize="40sp" />
+</FrameLayout>

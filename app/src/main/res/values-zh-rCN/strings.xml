@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">私人助理</string>
+    <string name="task">Task</string>
+    <string name="app_desc">私人助理，方便你的生活</string>
+    <string name="setting">设置</string>
+    <string name="username">用户名</string>
+
+    <string name="about">关于</string>
+    <string name="exit">退出</string>
+    <string name="more">更多</string>
+    <string name="normal_setting">常规设置</string>
+    <string name="other">其他设置</string>
+    <string name="advice_feedback">意见反馈</string>
+    <string name="give_favor">给应用点赞</string>
+    <string name="sync">同步</string>
+
+    <string name="note_log_text" formatted="false">%s\u0020:\u0020%s</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="lock">加密</string>
+    <string name="unlock">解锁</string>
+    <string name="enter_password_hint">请输入密码</string>
+    <string name="enter_password_again_hint">确认密码</string>
+
+    <string name="forget_password">忘记密码??点击这里</string>
+    <string name="start_vibrate">手机振动</string>
+    <string name="start_vibrate_summary">开启后，当闹钟响起手机会振动。</string>
+    <string name="adjust_volume">调节铃音音量</string>
+
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="delete_tip">是否要从本地删除了该条笔记</string>
+    <string name="tip">提示</string>
+    <string name="careful">小心！！！</string>
+    <string name="done">完成</string>
+    <string name="share">分享</string>
+    <string name="label">标签</string>
+    <string name="note_content">笔记内容</string>
+    <string name="new_note">新的笔记</string>
+    <string name="search_note">搜索笔记</string>
+    <string name="edit_note">编辑笔记</string>
+    <string name="view_note">查看笔记</string>
+    <string name="show_note_history_log_key">show_note_history_log_key</string>
+
+    <string name="start_vibrate_key">start_vibrate_key</string>
+    <string name="adjust_volume_key">adjust_volume_key</string>
+
+    <string name="lock_phone_vibrate">开启振动</string>
+    <string name="lock_phone_vibrate_key">lock_phone_vibrate_key</string>
+    <string name="lock_phone_vibrate_summary">如果开启振动，在手机锁定期间，如果试图玩手机，该手机将会一直振动。</string>
+
+
+    <string name="move_success">成功移除</string>
+    <string name="recover">恢复</string>
+    <string name="create">创建</string>
+    <string name="advice_feedback_key">advice_feedback_key</string>
+    <string name="no_email_app_tip">请先安装邮件应用并设置账户,或直接发送邮件至 lgpszu@163.com</string>
+    <string name="sync_account_key">sync_account_key</string>
+    <string name="sync_success">同步成功</string>
+    <string name="sync_fail">同步失败，建议在网络好的时候进行同步</string>
+    <string name="pay_for_me_title">觉得不错，随意打赏</string>
+    <string name="jianshu_blog">简书博客</string>
+    <string name="project_home">项目主页</string>
+    <string name="pay_for_me_tip">如果觉得极简笔记对您有用，请随意打赏。</string>
+    <string name="pay_for_me">随意打赏</string>
+    <string name="pay_for_me_key">pay_for_me_key</string>
+    <string name="recycle_bin">回收站</string>
+    <string name="give_favor_key">give_favor_key</string>
+    <string name="card_note_item_layout">卡片式笔记</string>
+    <string name="card_note_item_layout_key">card_note_item_layout_key</string>
+    <string name="not_save_note_leave_tip">笔记已经发生变化，是否保存后再离开</string>
+
+    <string name="change_theme">更换主题</string>
+    <string name="change_theme_key">change_theme_key</string>
+
+    <string name="set_password_summary">对私人笔记进行加密</string>
+    <string name="set_password">设置密码</string>
+    <string name="set_password_key">set_password_key</string>
+
+    <string name="before_hour" formatted="false">%d\u0020小时之前</string>
+    <string name="before_day" formatted="false">%d\u0020天之前</string>
+    <string name="before_month" formatted="false">%d\u0020个月之前</string>
+    <string name="before_year" formatted="false">%d\u0020年之前</string>
+
+    <string name="about_bottom_text">Copyright © 2015 Liaoguipeng.\nAll Rights Reserved.</string>
+
+    <string name="password_title">验证密码</string>
+    <string name="find_password_title">找回密码</string>
+
+
+    <string name="title">标题</string>
+    <string name="set_password_title">设置密码</string>
+    <string name="reset_password_title">重置密码</string>
+
+    <string name="volume_dialog_title">调节音量大小</string>
+    <string name="backup_local_key">backup_local_key</string>
+    <string name="backup_local_summary">备份笔记到存储卡/SNote/notes.txt</string>
+    <string name="backup_local">备份到本地</string>
+    <string name="backup_local_done">备份完成</string>
+    <string name="just_now">刚刚</string>
+    <string name="before_half_hour">半个小时之前</string>
+
+    <string name="notification_title">手机解锁</string>
+    <string name="notification_ticker">通知</string>
+    <string name="notification_content">该手机已经解锁</string>
+
+    <string name="new_alarm">新的闹钟</string>
+    <string name="edit_alarm">编辑闹钟</string>
+    <string name="set_alarm_ring">设置铃音</string>
+    <string name="set_alarm_my_ring">自定义铃音</string>
+    <string name="set_alarm_tag">设置标签</string>
+    <string name="lazy_level_title">选择你的赖床指数</string>
+    <string name="not_save_alarm_leave_tip">是否保存后再离开</string>
+
+    <string name="wake_alarm_tip">来，懒虫。先做个题</string>
+    <string name="wake_alarm_question">198 X 208 = ???</string>
+    <string name="please_input_your_answer">在这里输入答案</string>
+    <string name="show_question" formatted="false">%1$d\u0020X\u0020%2$d\u0020=\u0020???</string>
+    <string name="private_note_title">私密笔记</string>
+    <string name="no_times">还没有时间选项,点击添加按钮创建一个吧.</string>
+    <string name="no_notes">还没有笔记,点击添加按钮创建一个吧.</string>
+    <string name="no_alarms">还没有闹钟,点击添加按钮创建一个吧.</string>
+    <string name="display_seted_time_1" formatted="false">%s\u0020小时\u0020%s\u0020分钟</string>
+    <string name="display_seted_time_2" formatted="false">%s\u0020分钟</string>
+    <string name="display_seted_time_3" formatted="false">%s\u0020小时</string>
+    <string name="activate_device">激活设备</string>
+
+
+</resources>
