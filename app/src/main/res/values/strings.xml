@@ -153,7 +153,12 @@
     <string name="wake_alarm_tip">Come On, give me the answer</string>
     <string name="wake_alarm_question">198 X 208 = ???</string>
     <string name="please_input_your_answer">please input your answer</string>
-    <string name="show_question" formatted="false">%1$d\u0020X\u0020%2$d\u0020=\u0020???</string>
+
+    <string name="show_question_1" formatted="false">%1$d\u0020+\u0020%2$d\u0020+\u0020%3$d\u0020=\u0020???</string>
+    <string name="show_question_2" formatted="false">%1$d\u0020*\u0020%2$d\u0020+\u0020%3$d\u0020=\u0020???</string>
+    <string name="show_question_3" formatted="false">%1$d\u0020*\u0020%2$d\u0020+\u0020%3$d\u0020=\u0020???</string>
+    <string name="show_question_4" formatted="false">%1$d\u0020*\u0020%2$d\u0020*\u0020%3$d\u0020=\u0020???</string>
+
     <string name="private_note_title">Private Note</string>
     <string name="no_times">There is no time item, click add button to add an item.</string>
     <string name="no_notes">There is no note item, click add button to add an item.</string>

@@ -53,13 +53,13 @@ public class WakeUpActivity extends BaseActivity {
     LinearLayout displayLazyQuestion;
 
     private Alarm alarm;
-    private Date date;
     private DateFormat format;
     private int lazyLevel;
     private Intent service;
 
     private int numA;
     private int numB;
+    private int numC;
     private int result;
     private int count = 0;
 
@@ -159,40 +159,73 @@ public class WakeUpActivity extends BaseActivity {
     private void initQuestion() {
         btnOk.setEnabled(false);
         result = getRandomQuestion();
-        // 以 A x B = ???的形式显示问题
-        tvQuestion.setText(getResources().getString(R.string.show_question, numA, numB));
+        if (result == 0){
+            initQuestion();
+        }
+        switch (lazyLevel){
+            case 1:
+                tvQuestion.setText(getResources().getString(R.string.show_question_1, numA, numB, numC));
+                break;
+            case 2:
+                tvQuestion.setText(getResources().getString(R.string.show_question_2, numA, numB, numC));
+                break;
+            case 3:
+                tvQuestion.setText(getResources().getString(R.string.show_question_3, numA, numB, numC));
+                break;
+            case 4:
+                tvQuestion.setText(getResources().getString(R.string.show_question_4, numA, numB, numC));
+                break;
+        }
         btnOk.setEnabled(true);
     }
 
     private int getRandomQuestion() {
         Random random = new Random();
-
-        if (lazyLevel == 1) {
-            numA = random.nextInt(20) + 5;
-            numB = random.nextInt(20) + 5;
-        } else if (lazyLevel == 2) {
-            numA = random.nextInt(99) + 1;
-            numB = random.nextInt(99) + 1;
-        } else if (lazyLevel == 3) {
-            numA = random.nextInt(200) + 1;
-            numB = random.nextInt(200) + 1;
-            while (numA < 100) {
-                numA += 10;
-            }
-            while (numB < 100) {
-                numB += 10;
-            }
-        } else if (lazyLevel == 4) {
-            numA = random.nextInt(500) + 1;
-            numB = random.nextInt(500) + 1;
-            while (numA < 100) {
-                numA += 10;
-            }
-            while (numB < 200) {
-                numB += 30;
-            }
+        switch (lazyLevel){
+            case 1:
+                numA = random.nextInt(90) + 10;
+                numB = random.nextInt(80) + 20;
+                numC = random.nextInt(70) + 30;
+                return numA + numB + numC;
+            case 2:
+                numA = random.nextInt(18) + 2;
+                while (numA <= 10){
+                    numA += 2;
+                }
+                numB = random.nextInt(18) + 2;
+                while (numB <= 10){
+                    numB += 3;
+                }
+                numC = random.nextInt(200) + 100;
+                return numA * numB + numC;
+            case 3:
+                numA = random.nextInt(18) + 2;
+                while (numA <= 10){
+                    numA += 2;
+                }
+                numB = random.nextInt(38) + 1;
+                while (numB <= 20){
+                    numB += 5;
+                }
+                numC = random.nextInt(2000) + 1000;
+                return numA * numB + numC;
+            case 4:
+                numA = random.nextInt(5) + 5;
+                numB = random.nextInt(10) + 10;
+                while (numB <= 10){
+                    numB = numB + 2;
+                }
+                numC = random.nextInt(20) + 1;
+                while (numC <= 10){
+                    numC = numC + 2;
+                }
+                if (numB == numC){
+                    numC += 5;
+                }
+                return numA * numB * numC;
+            default:
+                return 0;
         }
-        return numA * numB;
     }
 
     private void showHelloDialog() {
@@ -220,7 +253,7 @@ public class WakeUpActivity extends BaseActivity {
      * 每分钟刷新一次界面的时间
      */
     private void refreshTime() {
-        date = new Date();
+        Date date = new Date();
         tvDisplayTime.setText(format.format(date));
     }
 

@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/SeekArc_library" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/orm-library" />
+            <option value="$PROJECT_DIR$/testjavacode" />
           </set>
         </option>
       </GradleProjectSettings>
