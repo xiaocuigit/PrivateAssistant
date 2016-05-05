@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
+import com.assistant.App;
 import com.assistant.bean.Alarm;
 import com.assistant.ui.activity.WakeUpActivity;
+import com.assistant.ui.fragment.AlarmFragment;
 import com.assistant.utils.TransformUtils;
 import com.orhanobut.logger.Logger;
 
 import java.util.Calendar;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 作者 : xiaocui
@@ -56,6 +60,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             // 如果该闹钟只响一次
             WakeUpPhone();
             ringAlarm();
+            // 闹钟响后既关闭它
+            alarm.setActivate(false);
+            App.getFinalDb().update(alarm);
+            EventBus.getDefault().post(AlarmFragment.AlarmEvent.ALARM_ONCE);
         } else {
             // 如果该闹钟时重复闹钟，首先判断今天是周几，然后判断用户设置的闹钟里面有没有设置该天响铃。
             Calendar calendar = Calendar.getInstance();

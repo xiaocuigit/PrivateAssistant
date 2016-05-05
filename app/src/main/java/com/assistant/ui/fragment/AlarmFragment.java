@@ -92,6 +92,38 @@ public class AlarmFragment extends BaseFragment {
         initData();
     }
 
+    /**
+     * 点击添加一个新的闹钟
+     */
+    @OnClick(R.id.add_Alarm)
+    public void onClick() {
+        mAlarm = new Alarm();
+        startAlarmActivity(ConstUtils.ADD_ALARM, mAlarm);
+    }
+
+    public void onEventMainThread(AlarmEvent event) {
+        switch (event) {
+            case UPDATE_ALARM:
+                updateAlarms();
+                break;
+            case CLOSE_MENU:
+                Logger.d("CLOSE_MENU is executed");
+                toggleMenu(onMenu);
+                break;
+            case ALARM_ONCE:
+                Logger.d("取消一次闹钟");
+                updateAlarms();
+                break;
+        }
+
+    }
+
+    public enum AlarmEvent {
+        UPDATE_ALARM,
+        CLOSE_MENU,
+        ALARM_ONCE
+    }
+
 /*******************************************华丽的分割线*********************************************/
 
     /**
@@ -178,13 +210,10 @@ public class AlarmFragment extends BaseFragment {
                 mAlarm.setActivate(false);
                 mAlarmClock.turnAlarm(mAlarm);
                 // 删除该闹钟在数据库的信息
-                threadPoolUtils.execute(() -> {
-                    finalDb.delete(mAlarm);
-                });
+                finalDb.delete(mAlarm);
                 // 从当前列表里面移除
                 mAlarmList.remove(position);
                 updateAlarms();
-                mAlarmAdapter.notifyDataSetChanged();
             });
 
             bt_update.setOnClickListener(v -> {
@@ -327,31 +356,4 @@ public class AlarmFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-
-    /**
-     * 点击添加一个新的闹钟
-     */
-    @OnClick(R.id.add_Alarm)
-    public void onClick() {
-        mAlarm = new Alarm();
-        startAlarmActivity(ConstUtils.ADD_ALARM, mAlarm);
-    }
-
-    public void onEventMainThread(AlarmEvent event) {
-        switch (event) {
-            case UPDATE_ALARM:
-                updateAlarms();
-                break;
-            case CLOSE_MENU:
-                Logger.d("CLOSE_MENU is executed");
-                toggleMenu(onMenu);
-                break;
-        }
-
-    }
-
-    public enum AlarmEvent {
-        UPDATE_ALARM,
-        CLOSE_MENU
-    }
 }
