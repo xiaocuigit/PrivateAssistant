@@ -190,9 +190,9 @@ public class SettingFragment extends SetBaseFragment {
      * 如果当前用户已经存在私密笔记密码，则提示用户是否重置密码，若选择重置密码，需要先输入登录的密码进行确认。
      */
     private void checkIsSetPassword() {
-        String privatePassword = preferenceUtils.getStringParam(ConstUtils.PRIVATE_NOTE_PASSWORD, "");
+
         PasswordUtils passwordUtils = new PasswordUtils(mContext);
-        if (TextUtils.isEmpty(privatePassword)) {
+        if (TextUtils.isEmpty(App.getUser().getNotePassword())) {
             // 如果与用户还没有设置加密笔记的密码
             passwordUtils.showSetPrivatePWDialog(mContext.getString(R.string.set_password_title));
         } else {

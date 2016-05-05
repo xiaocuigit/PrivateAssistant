@@ -45,14 +45,15 @@
     <string name="start_vibrate_key">start_vibrate_key</string>
     <string name="adjust_volume_key">adjust_volume_key</string>
 
-    <string name="lock_phone_vibrate">开启振动</string>
+    <string name="lock_phone_vibrate">手机振动</string>
     <string name="lock_phone_vibrate_key">lock_phone_vibrate_key</string>
-    <string name="lock_phone_vibrate_summary">如果开启振动，在手机锁定期间，如果试图玩手机，该手机将会一直振动。</string>
+    <string name="lock_phone_vibrate_summary">如果开启振动，在手机锁定期间，如果试图玩手机，该手机将会有振动提示。</string>
 
 
     <string name="move_success">成功移除</string>
     <string name="recover">恢复</string>
     <string name="create">创建</string>
+    <string name="last_update">最后编辑</string>
     <string name="advice_feedback_key">advice_feedback_key</string>
     <string name="no_email_app_tip">请先安装邮件应用并设置账户,或直接发送邮件至 lgpszu@163.com</string>
     <string name="sync_account_key">sync_account_key</string>
