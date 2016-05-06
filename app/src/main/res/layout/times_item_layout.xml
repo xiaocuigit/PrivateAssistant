@@ -1,77 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/notes_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants">
-
-    <LinearLayout
-        android:id="@+id/ll_button_item"
-        android:layout_width="wrap_content"
-        android:layout_height="60sp"
-        android:layout_centerVertical="true"
-        android:paddingRight="5dp">
-
-        <Button
-            android:id="@+id/bt_delete_item"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_red_light"
-            android:clickable="false"
-            android:focusable="false"
-            android:text="删除"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/bt_update_item"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:clickable="false"
-            android:focusable="false"
-            android:text="修改时间"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black" />
-    </LinearLayout>
+    app:mrl_rippleColor="?attr/colorPrimary"
+    app:mrl_rippleOverlay="true">
 
     <RelativeLayout
-        android:id="@+id/rl_main_item"
         android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:background="@android:color/white"
-        android:gravity="center_vertical"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp">
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
 
-        <TextView
-            android:id="@+id/tv_time_item"
+        <LinearLayout
+            android:id="@+id/ll_button_item"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="锁定 2小时30分钟"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="28sp" />
-
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/bt_turn_item"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_height="60sp"
             android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp"
-            app:kswBackDrawable="@drawable/flyme_back_drawable"
-            app:kswBackMeasureRatio="2.2"
-            app:kswThumbDrawable="@drawable/flyme_thumb_drawable"
-            app:kswThumbHeight="16dp"
-            app:kswThumbWidth="16dp" />
-    </RelativeLayout>
+            android:paddingRight="5dp">
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/bt_delete_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_red_light"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="删除"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/bt_update_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="修改时间"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/black" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_main_item"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp">
+
+            <TextView
+                android:id="@+id/tv_time_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="锁定 2小时30分钟"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="28sp" />
+
+            <com.kyleduo.switchbutton.SwitchButton
+                android:id="@+id/bt_turn_item"
+                style="@style/SwitchButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                app:kswBackDrawable="@drawable/flyme_back_drawable"
+                app:kswBackMeasureRatio="2.2"
+                app:kswThumbDrawable="@drawable/flyme_thumb_drawable"
+                app:kswThumbHeight="16dp"
+                app:kswThumbWidth="16dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</com.balysv.materialripple.MaterialRippleLayout>

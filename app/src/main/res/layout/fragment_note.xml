@@ -8,20 +8,15 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/refresher"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="4dp" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent"
+            android:padding="4dp" />
 
         <TextView
             android:id="@+id/no_note_tip"
@@ -50,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_edit_white"
-        app:layout_anchor="@id/refresher"
+        app:layout_anchor="@id/relativeLayout"
         app:layout_anchorGravity="bottom|right|end"
         fab:fabSize="normal" />
 </android.support.design.widget.CoordinatorLayout>

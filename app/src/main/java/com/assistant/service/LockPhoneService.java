@@ -1,5 +1,6 @@
 package com.assistant.service;
 
+import android.app.KeyguardManager;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -111,14 +112,19 @@ public class LockPhoneService extends Service {
                 if (App.getRingState() == ConstUtils.COMING_RING) {
                     Logger.d("有来电");
                 } else {
+                    // 关闭系统锁屏界面
+                    closeLockPhoneScreen();
+                    // 开启振动
                     startVibrate();
+                    // 启动自定义锁屏界面
                     Intent intent = new Intent(LockPhoneService.this, LockPhoneActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    // 延时1.5秒锁定手机
                     new Thread(() -> {
                         try {
-                            Thread.sleep(1000);
-                            Logger.d("延时1秒锁屏");
+                            Thread.sleep(1500);
+                            Logger.d("延时1.5秒锁屏");
                             // 重新锁屏
                             lockScreen();
                             EventBus.getDefault().post(LockPhoneActivity.LockPhoneActivityEvent.DESTROY_ACTIVITY);
@@ -143,10 +149,20 @@ public class LockPhoneService extends Service {
         });
     }
 
+    private void closeLockPhoneScreen() {
+        Context context = App.getContext();
+        KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock keyguardLock = keyguardManager.newKeyguardLock("Lock");
+        // 关闭系统锁屏界面
+        keyguardLock.disableKeyguard();
+    }
+
     /**
      * 锁屏
      */
     private void lockScreen() {
+        mDeviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mComponentName = new ComponentName(this, AdminReceiver.class);
         if (mDeviceManager.isAdminActive(mComponentName)) {
             mDeviceManager.lockNow();
             Logger.d("锁屏");

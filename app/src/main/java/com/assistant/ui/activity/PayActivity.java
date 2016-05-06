@@ -5,11 +5,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.assistant.R;
-import com.assistant.ui.fragment.SettingFragment;
 
 import butterknife.Bind;
 
-public class SettingActivity extends BaseActivity {
+public class PayActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -17,28 +16,18 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        init();
-    }
-
-    private void init() {
-        SettingFragment fragment = SettingFragment.getInstance(this);
-
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_content, fragment)
-                .commit();
     }
 
     @Override
     protected void initToolbar() {
         super.initToolbar(toolbar);
-        toolbar.setTitle(R.string.setting);
+        toolbar.setTitle(R.string.pay_for_me);
     }
 
     @Override
     protected int getLayoutView() {
-        return R.layout.activity_setting;
+        return R.layout.activity_pay;
+
     }
 
     @Override

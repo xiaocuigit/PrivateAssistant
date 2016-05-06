@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by cui on 2016/3/9.
  */
 public class MD5Utils {
+    // 将用户的笔记密码通过MD5算法编码成32位的字符串
     public static String enCode(String password) {
         StringBuffer buffer = null;
         try {

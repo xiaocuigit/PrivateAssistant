@@ -13,7 +13,6 @@
     <color name="dark_brown">#5D4037</color>
     <color name="accent_brown">#795548</color>
 
-
     <color name="blue">#2196F3</color>
     <color name="dark_blue">#1976D2</color>
     <color name="accent_blue">#448AFF</color>
@@ -50,7 +49,6 @@
     <color name="drawer_scrim_color">#88EEEEEE</color>
     <color name="action_bar_title_color">@android:color/white</color>
     <color name="window_background">@android:color/white</color>
-    
-    
-    <color name="translucent_background">#77000000</color>
+
+    <color name="translucent_background">#33000000</color>
 </resources>

@@ -8,25 +8,21 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/refresher"
+        <ListView
+            android:id="@+id/list_view_alarms"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-            <ListView
-                android:id="@+id/list_view_alarms"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+        </ListView>
 
-            </ListView>
-        </android.support.v4.widget.SwipeRefreshLayout>
 
         <TextView
             android:id="@+id/no_alarm_tip"
@@ -55,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_alarm_add_white_24dp"
-        app:layout_anchor="@id/refresher"
+        app:layout_anchor="@id/relativeLayout"
         app:layout_anchorGravity="bottom|right|end"
         fab:fabSize="normal" />
 </android.support.design.widget.CoordinatorLayout>

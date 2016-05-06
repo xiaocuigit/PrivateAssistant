@@ -58,8 +58,6 @@ public class PhoneFragment extends BaseFragment implements RadialTimePickerDialo
 
     @Bind(R.id.list_view_times)
     ListView lvTimes;
-    @Bind(R.id.refresher)
-    SwipeRefreshLayout refresher;
     @Bind(R.id.no_time_text)
     TextView noTimeText;
     @Bind(R.id.add_Time)

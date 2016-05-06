@@ -45,13 +45,10 @@ import de.greenrobot.event.EventBus;
  * <p>
  * 功能描述 :
  */
-public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class NoteFragment extends BaseFragment{
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-
-    @Bind(R.id.refresher)
-    SwipeRefreshLayout refreshLayout;
 
     @Bind(R.id.progress_wheel)
     ProgressWheel progressWheel;
@@ -63,7 +60,7 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private NotesAdapter recyclerAdapter;
 
-    private boolean cardLayout = true;
+    private boolean cardLayout = true;   // 笔记默认是以卡片风格显示
 
     public static NoteFragment newInstance() {
         return new NoteFragment();
@@ -72,6 +69,7 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 注册事件接收器
         EventBus.getDefault().register(this);
     }
 
@@ -89,6 +87,7 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onResume() {
         super.onResume();
+        // 当界面重新呈现给用户时检测当前笔记显示的风格
         if (cardLayout != preferenceUtils.getBooleanParam(ConstUtils.CARD_LAYOUT, true)) {
             cardLayout = !cardLayout;
             changeItemLayout(cardLayout);
@@ -101,17 +100,6 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         super.onDestroy();
     }
 
-    /**
-     * 下拉刷新实现的功能--未实现
-     */
-    @Override
-    public void onRefresh() {
-        if (refreshLayout.isRefreshing()) {
-            refreshLayout.setEnabled(false);
-        } else {
-            refreshLayout.setEnabled(false);
-        }
-    }
 
     /**
      * 添加笔记的监听按钮
@@ -159,7 +147,6 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     @Override
                     public void OnClickListener(View parentV, View v, Integer position, Note values) {
                         super.OnClickListener(parentV, v, position, values);
-//                        refreshLayout.setEnabled(true);
                         // 以查看的模式进入笔记
                         startNoteActivity(NoteActivity.VIEW_NOTE_TYPE, values);
                     }
@@ -184,8 +171,6 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         recyclerAdapter.setDuration(300);
         recyclerView.setAdapter(recyclerAdapter);
         showProgressWheel(false);
-        refreshLayout.setColorSchemeColors(getColorPrimary());
-        refreshLayout.setOnRefreshListener(this);
     }
 
     private void showPrivatePopupMenu(View view, Note note) {
@@ -440,13 +425,10 @@ public class NoteFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             case UPDATE_NOTE:
                 updateNotes();
                 break;
-            case UPDATE_PRIVATE_NOTE:
-                break;
         }
     }
 
     public enum NoteEvent {
         UPDATE_NOTE,             // 更新正常的笔记
-        UPDATE_PRIVATE_NOTE      // 更新加密的笔记
     }
 }

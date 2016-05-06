@@ -1,6 +1,7 @@
 package com.assistant.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
@@ -8,6 +9,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceScreen;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,14 +18,20 @@ import android.widget.TextView;
 
 import com.assistant.App;
 import com.assistant.R;
+import com.assistant.bean.Note;
+import com.assistant.ui.activity.PayActivity;
 import com.assistant.utils.ConstUtils;
 import com.assistant.utils.DialogUtils;
+import com.assistant.utils.FileUtils;
 import com.assistant.utils.PasswordUtils;
 import com.assistant.utils.ThemeUtil;
 import com.jenzz.materialpreference.CheckBoxPreference;
 import com.jenzz.materialpreference.Preference;
 import com.jenzz.materialpreference.SwitchPreference;
+import com.orhanobut.logger.Logger;
 import com.triggertrap.seekarc.SeekArc;
+
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -48,7 +56,6 @@ public class SettingFragment extends SetBaseFragment {
 
     private Preference feedbackPreference;                  // 意见反馈
     private Preference payMePreference;                     // 赞赏
-    private Preference giveFavorPreference;                 // 点赞
 
     private boolean cardLayout;
     private boolean isVibrate;
@@ -102,7 +109,6 @@ public class SettingFragment extends SetBaseFragment {
 
         feedbackPreference = (Preference) findPreference(getString(R.string.advice_feedback_key));
         payMePreference = (Preference) findPreference(getString(R.string.pay_for_me_key));
-        giveFavorPreference = (Preference) findPreference(getString(R.string.give_favor_key));
 
         initFeedbackPreference();
         audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
@@ -169,19 +175,52 @@ public class SettingFragment extends SetBaseFragment {
         if (TextUtils.equals(key, getString(R.string.set_password_key))) {
             checkIsSetPassword();
         }
-        if (TextUtils.equals(key, getString(R.string.pay_for_me_key))) {
-//            Intent intent = new Intent(getActivity(), PayActivity.class);
-//            startActivity(intent);
-        }
-
-        if (TextUtils.equals(key, getString(R.string.give_favor_key))) {
-//            giveFavor();
-        }
 
         if (TextUtils.equals(key, getString(R.string.backup_local_key))) {
-//            backupLocal();
+            backupLocal();
+        }
+
+        // 随意打赏
+        if (TextUtils.equals(key, getString(R.string.pay_for_me_key))) {
+            Intent intent = new Intent(getActivity(), PayActivity.class);
+            startActivity(intent);
+        }
+
+        if (TextUtils.equals(key, getString(R.string.advice_feedback_key))) {
+
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    /**
+     * 将笔记本分到本地
+     */
+    private void backupLocal() {
+        FileUtils fileUtils = new FileUtils();
+
+        List<Note> notes;
+        String userId = App.getUser().getUserId();
+        if (TextUtils.isEmpty(userId)) {
+            Logger.d("用户没有登录");
+            return;
+        }
+        String strWhere = "userId = " + "\'" + userId + "\'";
+
+        notes = App.getFinalDb().findAllByWhere(Note.class, strWhere, "lastOprTime", true);
+        if (notes.size() > 0) {
+            if (fileUtils.backupSNotes(notes)) {
+                showSnackbar("笔记备份成功");
+            } else {
+                showSnackbar("笔记备份失败");
+            }
+        } else {
+            showSnackbar("没有笔记需要备份");
+        }
+
+    }
+
+    private void showSnackbar(String message) {
+        Snackbar.make(getActivity().getWindow().getDecorView(), message, Snackbar.LENGTH_SHORT).show();
     }
 
     /**

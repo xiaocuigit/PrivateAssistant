@@ -22,7 +22,7 @@
             android:title="设置" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="通用">
         <menu>
             <item
                 android:id="@+id/nav_share"

@@ -33,7 +33,7 @@ public class AlarmClock {
     }
 
     /**
-     * 更加Alarm 对象的 isAlarmOn 字段来控制闹钟的开关
+     * 根据Alarm 对象的 isAlarmOn 字段来控制闹钟的开关
      *
      * @param alarm
      */

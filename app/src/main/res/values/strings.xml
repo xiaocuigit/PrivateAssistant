@@ -74,7 +74,7 @@
     <string name="sync_fail">Sync fail</string>
     <string name="pay_for_me_title">Pay For Me</string>
 
-    <string name="pay_for_me_tip">If you think the SuccinctNotes useful to you, please feel free to reward.</string>
+    <string name="pay_for_me_tip">If you think the PrivateAssistant useful to you, please feel free to reward.</string>
     <string name="pay_for_me">Pay</string>
     <string name="pay_for_me_key">pay_for_me_key</string>
     <string name="recycle_bin">Trash</string>
@@ -103,15 +103,9 @@
         <item>Sina Weibo</item>
         <item>More</item>
     </array>
-    <string name="about_bottom_text">Copyright © 2015 Liaoguipeng.\nAll Rights Reserved.</string>
-    <string name="bind_ever_note_fail">Bind EverNote fail</string>
-    <string name="bind_ever_note_success">Bind EverNote success</string>
-    <string name="ever_note_account">EverNote Account</string>
-    <string name="ever_note_account_key">ever_note_account_key</string>
-    <string name="has_unbind_ever_note_tip">Are you sure to unbind EverNote</string>
+    <string name="about_bottom_text">Copyright © 2016 Cui RuiLong.\nAll Rights Reserved.</string>
+
     <string name="expunge_error">Expunge Delete Error</string>
-    <string name="unbind_ever_note_tip">Go to settings and bind EverNote</string>
-    <string name="go_bind">Bind</string>
     <string name="delete_error">Delete error</string>
     <string name="recovering">Recovering</string>
     <string name="frequent_api_tip">Try again later</string>
@@ -131,7 +125,7 @@
 
     <string name="volume_dialog_title">Adjust Alarm Volume</string>
     <string name="backup_local_key">backup_local_key</string>
-    <string name="backup_local_summary">Backup notes to SDCard /SNote/notes.txt</string>
+    <string name="backup_local_summary">Backup notes to inner card /MyNotes/notes.txt</string>
     <string name="backup_local">Backup Local</string>
     <string name="backup_local_done">Backup done</string>
     <string name="just_now">just now</string>
@@ -168,5 +162,6 @@
     <string name="display_seted_time_1" formatted="false">%s\u0020Hour\u0020%s\u0020Minute</string>
     <string name="display_seted_time_2" formatted="false">%s\u0020Minute</string>
     <string name="display_seted_time_3" formatted="false">%s\u0020Hour</string>
+    <string name="advice_feedback_summary">如果您对私人助理软件有任何建议，请发送邮件到xiaocuikindle@163.com</string>
 
 </resources>

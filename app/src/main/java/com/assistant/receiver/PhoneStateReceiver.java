@@ -34,8 +34,6 @@ public class PhoneStateReceiver extends BroadcastReceiver {
         App.setRingState(ConstUtils.COMING_RING);
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
         tm.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
-
-
     }
 
     PhoneStateListener listener = new PhoneStateListener() {
@@ -48,7 +46,6 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                         // 如果打完电话手机还处于锁定期间，则锁屏
                         EventBus.getDefault().post(LockPhoneService.ServiceEvent.LOCK_SCREEN);
                     }
-
                     Toast.makeText(mContext, "挂断", Toast.LENGTH_SHORT).show();
                     Logger.d("***挂断***");
                     break;

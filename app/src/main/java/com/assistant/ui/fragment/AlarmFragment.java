@@ -47,8 +47,6 @@ public class AlarmFragment extends BaseFragment {
 
     @Bind(R.id.list_view_alarms)
     ListView lv_alarm;
-    @Bind(R.id.refresher)
-    SwipeRefreshLayout refreshLayout;
     @Bind(R.id.add_Alarm)
     FloatingActionButton addAlarm;
     @Bind(R.id.progress_wheel)

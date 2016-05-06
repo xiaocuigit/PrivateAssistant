@@ -51,7 +51,8 @@ public class ConstUtils {
     public static final String REMEMBER_PASSWORD = "REMEMBER_PASSWORD";
     public static final String USER_NAME = "USER_NAME";
     public static final String PASSWORD = "PASSWORD";
-    public static final String PRIVATE_NOTE_PASSWORD = "PRIVATE_NOTE_PASSWORD";
+
+    public static final String PROJECT_URL = "https://github.com/xiaocuigit/PrivateAssistant";
 
 
 }

@@ -8,22 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/refresher"
+
+        <ListView
+            android:id="@+id/list_view_times"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-            <ListView
-                android:id="@+id/list_view_times"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
-
-            </ListView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </ListView>
 
         <TextView
             android:id="@+id/no_time_text"

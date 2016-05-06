@@ -23,7 +23,7 @@ public class Note {
     private Long lastOprTime;   // 最后一次修改时间
 
     private String userId;      // 用来区分不同的用户
-    private String isLock;     // 是否加锁
+    private String isLock;      // 是否加锁
 
     public Integer getId() {
         return id;

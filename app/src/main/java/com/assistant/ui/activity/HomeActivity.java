@@ -80,7 +80,6 @@ public class HomeActivity extends BaseActivity
                 this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.setDrawerListener(toggle);
         navView.setNavigationItemSelectedListener(this);
-
     }
 
     /**
@@ -250,6 +249,7 @@ public class HomeActivity extends BaseActivity
                 startActivity(intent);
                 return true;
             case R.id.about:
+                startActivity(new Intent(this, AboutActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

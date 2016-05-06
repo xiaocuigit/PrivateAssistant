@@ -62,7 +62,7 @@
     <string name="pay_for_me_title">觉得不错，随意打赏</string>
     <string name="jianshu_blog">简书博客</string>
     <string name="project_home">项目主页</string>
-    <string name="pay_for_me_tip">如果觉得极简笔记对您有用，请随意打赏。</string>
+    <string name="pay_for_me_tip">如果觉得私人助理软件对您有用，请随意打赏。</string>
     <string name="pay_for_me">随意打赏</string>
     <string name="pay_for_me_key">pay_for_me_key</string>
     <string name="recycle_bin">回收站</string>
@@ -83,7 +83,7 @@
     <string name="before_month" formatted="false">%d\u0020个月之前</string>
     <string name="before_year" formatted="false">%d\u0020年之前</string>
 
-    <string name="about_bottom_text">Copyright © 2015 Liaoguipeng.\nAll Rights Reserved.</string>
+    <string name="about_bottom_text">Copyright © 2016 Cui RuiLong.\nAll Rights Reserved.</string>
 
     <string name="password_title">验证密码</string>
     <string name="find_password_title">找回密码</string>
@@ -95,7 +95,7 @@
 
     <string name="volume_dialog_title">调节音量大小</string>
     <string name="backup_local_key">backup_local_key</string>
-    <string name="backup_local_summary">备份笔记到存储卡/SNote/notes.txt</string>
+    <string name="backup_local_summary">备份笔记到内部存储卡/MyNotes/notes.txt</string>
     <string name="backup_local">备份到本地</string>
     <string name="backup_local_done">备份完成</string>
     <string name="just_now">刚刚</string>
@@ -128,6 +128,7 @@
     <string name="display_seted_time_2" formatted="false">%s\u0020分钟</string>
     <string name="display_seted_time_3" formatted="false">%s\u0020小时</string>
     <string name="activate_device">激活设备</string>
+    <string name="advice_feedback_summary">如果您对私人助理软件有任何建议,请发送邮件到xiaocuikindle@163.com</string>
 
 
 </resources>

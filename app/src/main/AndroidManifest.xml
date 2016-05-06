@@ -114,6 +114,9 @@
             android:name=".service.LockPhoneService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".ui.activity.PayActivity" />
+        <activity android:name=".ui.activity.AboutActivity"></activity>
     </application>
 
 </manifest>

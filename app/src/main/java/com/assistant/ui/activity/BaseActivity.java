@@ -37,20 +37,19 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        init();
+        initTheme();
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutView());
+        ButterKnife.bind(this);
+        initToolbar();
+    }
+
+    private void init() {
         preferenceUtils = App.getPreferenceUtils();
         threadPoolUtils = App.getThreadPoolUtils();
         finalDb = App.getFinalDb();
         user = App.getUser();
-
-        initTheme();
-
-        super.onCreate(savedInstanceState);
-
-        setContentView(getLayoutView());
-
-        ButterKnife.bind(this);
-
-        initToolbar();
     }
 
     protected void initTabLayout(TabLayout tabLayout) {

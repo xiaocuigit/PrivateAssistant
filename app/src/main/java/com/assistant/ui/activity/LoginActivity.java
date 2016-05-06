@@ -102,12 +102,14 @@ public class LoginActivity extends AppCompatActivity {
         if (bmobUser != null) {
             Logger.d("username" + bmobUser.getUsername());
             FinalDb finalDb = App.getFinalDb();
+            // 从数据库总读取所有的用户信息
             List<User> list = finalDb.findAll(User.class);
             for (User user : list) {
                 if (user.getUserId().equals(bmobUser.getObjectId())) {
                     Logger.d("password = " + user.getSavePassword());
                     Logger.d("免除登录");
                     App.setUser(user);
+                    // 进入软件主页
                     startHomeActivity();
                     return;
                 }
@@ -251,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
         BmobUser user = new BmobUser();
         user.setUsername(username);
         user.setPassword(password);
+        // 初始化用户信息
         initUserInfo();
         user.login(this, new SaveListener() {
             @Override
@@ -329,7 +332,6 @@ public class LoginActivity extends AppCompatActivity {
                 Logger.d(s);
             }
         });
-
     }
 
     /**
