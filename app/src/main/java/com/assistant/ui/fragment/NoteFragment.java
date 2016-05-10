@@ -26,6 +26,7 @@ import com.assistant.ui.activity.NoteActivity;
 import com.assistant.utils.ConstUtils;
 import com.assistant.utils.DialogUtils;
 import com.assistant.utils.PasswordUtils;
+import com.assistant.view.BetterFab;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ import de.greenrobot.event.EventBus;
  * <p>
  * 功能描述 :
  */
-public class NoteFragment extends BaseFragment{
+public class NoteFragment extends BaseFragment {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -54,7 +55,8 @@ public class NoteFragment extends BaseFragment{
     ProgressWheel progressWheel;
 
     @Bind(R.id.fab)
-    FloatingActionButton addNote;
+    BetterFab addNote;
+
     @Bind(R.id.no_note_tip)
     TextView noNoteTip;
 
@@ -101,6 +103,11 @@ public class NoteFragment extends BaseFragment{
     }
 
 
+    private void showFab(boolean visible) {
+        addNote.setForceHide(!visible);
+    }
+
+
     /**
      * 添加笔记的监听按钮
      */
@@ -108,6 +115,43 @@ public class NoteFragment extends BaseFragment{
     public void onClick() {
         Note note = new Note();
         startNoteActivity(NoteActivity.CREATE_NOTE_TYPE, note);
+    }
+
+    /**
+     * 接收来自 搜索框 发送的事件
+     *
+     * @param text
+     */
+    public void onEventMainThread(String text) {
+        // 显示搜索的信息
+        recyclerAdapter.getFilter().filter(text);
+    }
+
+    /**
+     * 接收异步事件的处理函数
+     *
+     * @param event
+     */
+
+    public void onEventMainThread(NoteEvent event) {
+        switch (event) {
+            // 更新当前笔记内容
+            case UPDATE_NOTE:
+                updateNotes();
+                break;
+            case HIDE_FAB:
+                showFab(false);
+                break;
+            case DISPLAY_FAB:
+                showFab(true);
+                break;
+        }
+    }
+
+    public enum NoteEvent {
+        UPDATE_NOTE,             // 更新正常的笔记
+        HIDE_FAB,                // 隐藏悬浮按钮
+        DISPLAY_FAB              // 显示悬浮按钮
     }
 
 
@@ -244,6 +288,7 @@ public class NoteFragment extends BaseFragment{
         });
         popup.show();
     }
+
 
     /**
      * 分享笔记
@@ -401,34 +446,5 @@ public class NoteFragment extends BaseFragment{
                 }
             }, 300);
         }
-    }
-
-    /**
-     * 接收来自 搜索框 发送的事件
-     *
-     * @param text
-     */
-    public void onEventMainThread(String text) {
-        // 显示搜索的信息
-        recyclerAdapter.getFilter().filter(text);
-    }
-
-    /**
-     * 接收异步事件的处理函数
-     *
-     * @param event
-     */
-
-    public void onEventMainThread(NoteEvent event) {
-        switch (event) {
-            // 更新当前笔记内容
-            case UPDATE_NOTE:
-                updateNotes();
-                break;
-        }
-    }
-
-    public enum NoteEvent {
-        UPDATE_NOTE,             // 更新正常的笔记
     }
 }

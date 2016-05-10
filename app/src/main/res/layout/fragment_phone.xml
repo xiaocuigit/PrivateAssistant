@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ListView
             android:id="@+id/list_view_times"
@@ -30,16 +31,17 @@
             android:text="@string/no_times"
             android:visibility="gone" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_Time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_content_add"
-            fab:fabSize="normal" />
     </RelativeLayout>
 
+    <com.assistant.view.BetterFab
+        android:id="@+id/add_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_content_add"
+        app:layout_anchor="@id/relativeLayout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="com.assistant.view.behavior.FabBehavior"
+        fab:fabSize="normal" />
 
 </android.support.design.widget.CoordinatorLayout>

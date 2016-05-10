@@ -107,6 +107,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onSuccess() {
                 showProgressWheel(false);
                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                showToast("注册成功");
                 finish();
             }
 

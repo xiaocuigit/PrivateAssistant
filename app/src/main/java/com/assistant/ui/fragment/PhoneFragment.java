@@ -33,6 +33,7 @@ import com.assistant.service.LockPhoneService;
 import com.assistant.ui.activity.LockPhoneActivity;
 import com.assistant.utils.ConstUtils;
 import com.assistant.utils.DialogUtils;
+import com.assistant.view.BetterFab;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.orhanobut.logger.Logger;
@@ -61,7 +62,7 @@ public class PhoneFragment extends BaseFragment implements RadialTimePickerDialo
     @Bind(R.id.no_time_text)
     TextView noTimeText;
     @Bind(R.id.add_Time)
-    FloatingActionButton addTime;
+    BetterFab addTime;
 
     private List<TimeItem> mTimeItems;
     private TimeItemAdapter mTimeItemAdapter;
@@ -423,6 +424,7 @@ public class PhoneFragment extends BaseFragment implements RadialTimePickerDialo
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
+        lvTimes.setVerticalScrollBarEnabled(false);
     }
 
     private void initAdapter() {

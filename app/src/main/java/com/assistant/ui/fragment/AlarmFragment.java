@@ -23,6 +23,7 @@ import com.assistant.bean.Alarm;
 import com.assistant.controll.AlarmClock;
 import com.assistant.ui.activity.AddAlarmActivity;
 import com.assistant.utils.ConstUtils;
+import com.assistant.view.BetterFab;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.orhanobut.logger.Logger;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -48,7 +49,7 @@ public class AlarmFragment extends BaseFragment {
     @Bind(R.id.list_view_alarms)
     ListView lv_alarm;
     @Bind(R.id.add_Alarm)
-    FloatingActionButton addAlarm;
+    BetterFab addAlarm;
     @Bind(R.id.progress_wheel)
     ProgressWheel progressWheel;
     @Bind(R.id.no_alarm_tip)
@@ -234,6 +235,8 @@ public class AlarmFragment extends BaseFragment {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
+        // 禁用listview的滚动条
+        lv_alarm.setVerticalScrollBarEnabled(false);
     }
 
     private void startAlarmActivity(int oprType, Alarm mAlarm) {

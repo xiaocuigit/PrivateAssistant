@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
+        <com.assistant.view.FixedListView
             android:id="@+id/list_view_alarms"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,7 +21,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-        </ListView>
+        </com.assistant.view.FixedListView>
 
 
         <TextView
@@ -45,7 +45,7 @@
         wheel:matProg_progressIndeterminate="true"
         wheel:matProg_spinSpeed="1.2" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.assistant.view.BetterFab
         android:id="@+id/add_Alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,5 +53,6 @@
         android:src="@drawable/ic_alarm_add_white_24dp"
         app:layout_anchor="@id/relativeLayout"
         app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="com.assistant.view.behavior.FabBehavior"
         fab:fabSize="normal" />
 </android.support.design.widget.CoordinatorLayout>
