@@ -59,6 +59,4 @@ public class BaseFragment extends Fragment {
         mActivity.getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
         return typedValue.data;
     }
-
-
 }

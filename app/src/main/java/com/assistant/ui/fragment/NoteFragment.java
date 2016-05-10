@@ -26,6 +26,7 @@ import com.assistant.ui.activity.NoteActivity;
 import com.assistant.utils.ConstUtils;
 import com.assistant.utils.DialogUtils;
 import com.assistant.utils.PasswordUtils;
+import com.assistant.view.BetterFab;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ import de.greenrobot.event.EventBus;
  * <p>
  * 功能描述 :
  */
-public class NoteFragment extends BaseFragment{
+public class NoteFragment extends BaseFragment {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -54,7 +55,8 @@ public class NoteFragment extends BaseFragment{
     ProgressWheel progressWheel;
 
     @Bind(R.id.fab)
-    FloatingActionButton addNote;
+    BetterFab addNote;
+
     @Bind(R.id.no_note_tip)
     TextView noNoteTip;
 
@@ -98,6 +100,11 @@ public class NoteFragment extends BaseFragment{
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+
+    private void showFab(boolean visible) {
+        addNote.setForceHide(!visible);
     }
 
 
@@ -244,6 +251,7 @@ public class NoteFragment extends BaseFragment{
         });
         popup.show();
     }
+
 
     /**
      * 分享笔记
@@ -425,10 +433,18 @@ public class NoteFragment extends BaseFragment{
             case UPDATE_NOTE:
                 updateNotes();
                 break;
+            case HIDE_FAB:
+                showFab(false);
+                break;
+            case DISPLAY_FAB:
+                showFab(true);
+                break;
         }
     }
 
     public enum NoteEvent {
         UPDATE_NOTE,             // 更新正常的笔记
+        HIDE_FAB,                // 隐藏悬浮按钮
+        DISPLAY_FAB              // 显示悬浮按钮
     }
 }

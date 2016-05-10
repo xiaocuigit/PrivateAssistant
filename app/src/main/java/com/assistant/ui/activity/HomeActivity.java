@@ -24,6 +24,7 @@ import com.assistant.App;
 import com.assistant.R;
 import com.assistant.ui.fragment.AlarmFragment;
 import com.assistant.ui.fragment.MyFragmentPageAdapter;
+import com.assistant.ui.fragment.NoteFragment;
 import com.assistant.utils.ConstUtils;
 import com.assistant.utils.PasswordUtils;
 import com.assistant.utils.ThemeUtil;
@@ -233,6 +234,19 @@ public class HomeActivity extends BaseActivity
             @Override
             public boolean onQueryTextChange(String newText) {
                 EventBus.getDefault().post(newText);
+                return true;
+            }
+        });
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                EventBus.getDefault().post(NoteFragment.NoteEvent.HIDE_FAB);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                EventBus.getDefault().post(NoteFragment.NoteEvent.DISPLAY_FAB);
                 return true;
             }
         });
