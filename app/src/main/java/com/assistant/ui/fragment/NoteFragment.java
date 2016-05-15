@@ -427,6 +427,7 @@ public class NoteFragment extends BaseFragment {
         showProgressWheel(false);
     }
 
+
     /**
      * 进度条开关设置
      *
