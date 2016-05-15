@@ -14,55 +14,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cacheColorHint="@android:color/transparent"
-            android:fadingEdge="none"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            android:scrollingCache="false">
+            android:layout_margin="15dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/label_edit_text"
+                style="@style/EditTextTheme"
+                android:textSize="@dimen/abc_text_size_large_material"
+                app:met_floatingLabel="highlight"
+                app:met_floatingLabelAlwaysShown="true"
+                app:met_floatingLabelText="@string/title"
+                app:met_floatingLabelTextColor="?attr/colorPrimary"
+                app:met_primaryColor="?attr/colorPrimary" />
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="none"
+                android:overScrollMode="ifContentScrolls"
+                android:scrollbars="vertical"
+                android:scrollingCache="false">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/label_edit_text"
-                    style="@style/EditTextTheme"
-                    android:textSize="@dimen/abc_text_size_large_material"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelAlwaysShown="true"
-                    app:met_floatingLabelText="@string/title"
-                    app:met_floatingLabelTextColor="?attr/colorPrimary"
-                    app:met_primaryColor="?attr/colorPrimary" />
-
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/content_edit_text"
-                    style="@style/EditTextTheme"
-                    android:lineSpacingExtra="4dp"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelAlwaysShown="true"
-                    app:met_floatingLabelText="@string/note_content"
-                    app:met_floatingLabelTextColor="?attr/colorPrimary"
-                    app:met_hideUnderline="true"
-                    app:met_primaryColor="?attr/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/opr_time_line_text"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="6dp"
-                    android:gravity="end"
-                    android:lineSpacingExtra="4dp"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/abc_text_size_small_material"
-                    tool:text="015-5-25:14:01" />
-            </LinearLayout>
-        </ScrollView>
+                    android:orientation="vertical">
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/content_edit_text"
+                        style="@style/EditTextTheme"
+                        android:lineSpacingExtra="4dp"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelAlwaysShown="true"
+                        app:met_floatingLabelText="@string/note_content"
+                        app:met_floatingLabelTextColor="?attr/colorPrimary"
+                        app:met_hideUnderline="true"
+                        app:met_primaryColor="?attr/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/opr_time_line_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="6dp"
+                        android:gravity="end"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/abc_text_size_small_material"
+                        tool:text="015-5-25:14:01" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
 
         <include layout="@layout/toolbar_shadow_layout" />
     </FrameLayout>
