@@ -55,8 +55,11 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         }
         lazyLevel = alarm.getLazyLevel();
         repeater = TransformUtils.getIntsDayOfWeek(alarm.getDayOfWeek());
+        for (int i = 0; i < repeater.length; i++){
+            Logger.d("repeater is " + repeater[i]);
+        }
 
-        if (repeater[0] == 0) {
+        if (repeater[0] == 8 && repeater.length == 1) {
             // 如果该闹钟只响一次
             WakeUpPhone();
             ringAlarm();
@@ -69,12 +72,14 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
             int current = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+            Logger.d("current = " + current);
             for (int i = 0; i < repeater.length; i++) {
                 Logger.e("repeater" + i + " = " + repeater[i]);
                 if (repeater[i] == current) {
+                    Logger.d("start the alarm" + current);
                     WakeUpPhone();
                     ringAlarm();
-                    //break;
+                    break;
                 }
             }
         }

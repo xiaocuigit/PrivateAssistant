@@ -11,6 +11,7 @@ import com.assistant.App;
 import com.assistant.R;
 import com.assistant.bean.Alarm;
 import com.assistant.controll.AlarmClock;
+import com.assistant.utils.TransformUtils;
 import com.kyleduo.switchbutton.SwitchButton;
 
 import net.tsz.afinal.FinalDb;
@@ -125,16 +126,17 @@ public class AlarmAdapter extends BaseAdapter {
         String desc;
         if (isAlarmOn) {
             String dayOfWeek = alarm.getDayOfWeek();
-            if (dayOfWeek.equals("0")) {
+            if (dayOfWeek.equals("8")) {
                 desc = "开启   一次性闹钟";
             } else if (dayOfWeek.equals("1,2,3,4,5,")) {
                 desc = "开启   工作日";
-            } else if (dayOfWeek.equals("1,2,3,4,5,6,7,")) {
+            } else if (dayOfWeek.equals("0,1,2,3,4,5,6,")) {
                 desc = "开启   每天";
-            } else if (dayOfWeek.equals("6,7,")) {
+            } else if (dayOfWeek.equals("0,6,")) {
                 desc = "开启   周末";
             } else {
-                desc = "开启   每周" + dayOfWeek + "重复";
+                StringBuffer days = transform(dayOfWeek);
+                desc = "开启   每周" + days + "重复";
             }
             holder.mDesc.setText(desc);
             holder.mTime.setTextColor(Color.BLACK);
@@ -145,6 +147,17 @@ public class AlarmAdapter extends BaseAdapter {
             holder.mTime.setTextColor(Color.GRAY);
             holder.mDesc.setTextColor(Color.GRAY);
         }
+    }
+
+    private StringBuffer transform(String dayOfWeek) {
+        String[] days = new String[]{"日", "一", "二", "三", "四", "五", "六"};
+        int[] repeater = TransformUtils.getIntsDayOfWeek(dayOfWeek);
+        StringBuffer text = new StringBuffer();
+        for (int i = 0; i < repeater.length; i++) {
+            text.append(days[repeater[i]]);
+            text.append(" ");
+        }
+        return text;
     }
 
     static class ViewHolder {

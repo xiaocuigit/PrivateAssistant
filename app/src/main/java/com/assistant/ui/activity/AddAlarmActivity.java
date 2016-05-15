@@ -89,6 +89,8 @@ public class AddAlarmActivity extends BaseActivity implements View.OnClickListen
         parseIntent(getIntent());
 
         EventBus.getDefault().registerSticky(this);
+
+        timePicker.setIs24HourView(true);
     }
 
     /**
@@ -272,6 +274,10 @@ public class AddAlarmActivity extends BaseActivity implements View.OnClickListen
 
     private String getRepeater() {
         String dayRepeater = "";
+
+        if (cbDay7.isChecked()) {
+            dayRepeater += "0" + ",";
+        }
         if (cbDay1.isChecked()) {
             dayRepeater += "1" + ",";
         }
@@ -290,11 +296,9 @@ public class AddAlarmActivity extends BaseActivity implements View.OnClickListen
         if (cbDay6.isChecked()) {
             dayRepeater += "6" + ",";
         }
-        if (cbDay7.isChecked()) {
-            dayRepeater += "7" + ",";
-        }
+
         if (dayRepeater.equals("")) {
-            dayRepeater = "0";
+            dayRepeater = "8";
         }
         return dayRepeater;
     }
@@ -367,13 +371,14 @@ public class AddAlarmActivity extends BaseActivity implements View.OnClickListen
 
     private void initCheckBox() {
         mRepeater = new ArrayList<>();
+        mRepeater.add(cbDay7);
         mRepeater.add(cbDay1);
         mRepeater.add(cbDay2);
         mRepeater.add(cbDay3);
         mRepeater.add(cbDay4);
         mRepeater.add(cbDay5);
         mRepeater.add(cbDay6);
-        mRepeater.add(cbDay7);
+
     }
 
     @Override
@@ -421,11 +426,11 @@ public class AddAlarmActivity extends BaseActivity implements View.OnClickListen
     private void setMyRepeater() {
         int[] days = TransformUtils.getIntsDayOfWeek(mAlarm.getDayOfWeek());
         for (int i = 0; i < days.length; i++) {
-            if (days[0] == 0) {
+            if (days[0] == 8) {
                 break;
             } else {
                 // 根据用户的设置来初始化重复的天数
-                mRepeater.get(days[i] - 1).setChecked(true);
+                mRepeater.get(days[i]).setChecked(true);
             }
         }
     }
