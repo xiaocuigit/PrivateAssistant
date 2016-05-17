@@ -14,6 +14,8 @@
     <string name="give_favor">给应用点赞</string>
     <string name="sync">同步</string>
 
+    <string name="forget_login_password">找回密码</string>
+
     <string name="note_log_text" formatted="false">%s\u0020:\u0020%s</string>
     <string name="edit">编辑</string>
     <string name="delete">删除</string>

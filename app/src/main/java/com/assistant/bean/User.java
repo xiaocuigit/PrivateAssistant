@@ -20,7 +20,7 @@ public class User {
     // 用户的ID
     private String userId;
     // 用户的邮箱
-    private String userEmail;
+    private String userPhone;
     // 用户名
     private String userName;
     // 保存用户的密码
@@ -44,12 +44,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public String getUserName() {

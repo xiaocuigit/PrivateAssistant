@@ -5,17 +5,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.assistant.App;
 import com.assistant.R;
+import com.assistant.bean.MyBmobUser;
 import com.assistant.bean.User;
 import com.assistant.utils.CheckNetStateUtil;
 import com.assistant.utils.ConstUtils;
 import com.assistant.utils.KeyBoardUtils;
-import com.assistant.utils.PreferenceUtils;
 import com.orhanobut.logger.Logger;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
@@ -25,6 +25,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.bmob.sms.BmobSMS;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -36,23 +37,25 @@ public class LoginActivity extends AppCompatActivity {
     private static final String APPLICATION_ID = "3cf1b80eef7d353945fce65542f77344";
 
     @Bind(R.id.input_userName)
-    EditText userNameText;
+    EditText etUserName;
+
     @Bind(R.id.input_password)
-    EditText passwordText;
+    EditText etPassword;
+
     @Bind(R.id.btn_login)
-    Button loginButton;
-    @Bind(R.id.btn_signup)
-    Button signUpButton;
-    @Bind(R.id.cb_remember_password)
-    CheckBox rememberPasswordCb;
-    @Bind(R.id.cb_auto_login)
-    CheckBox autoLoginCb;
+    Button btnLogin;
+
+    @Bind(R.id.tv_signup_account)
+    TextView tvSignUp;
+
+    @Bind((R.id.tv_forget_password))
+    TextView tvForgetPassword;
+
     @Bind(R.id.progress_wheel)
     ProgressWheel progressWheel;
 
     private String username;
     private String password;
-    private PreferenceUtils preferenceUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,32 +72,65 @@ public class LoginActivity extends AppCompatActivity {
 
         initBmob();
 
-        preferenceUtils = App.getPreferenceUtils();
-
         if (!CheckNetStateUtil.netIsAvailable(this)) {
-            showToast("网络连接不可用");
-            return;
+            CheckNetStateUtil.showNetUnAvailableDialog(this);
         }
-        // 获取用户设置的默认值
-        getDefaultValue();
 
-        setDefaultValue();
-
-        loginButton.setOnClickListener(v -> {
+        btnLogin.setOnClickListener(v -> {
             if (!CheckNetStateUtil.netIsAvailable(this)) {
-                showToast("网络连接不可用");
+                CheckNetStateUtil.showNetUnAvailableDialog(this);
                 return;
             }
             readyLogin();
         });
 
-        signUpButton.setOnClickListener(v -> {
+        tvSignUp.setOnClickListener(v -> {
             // Start the Signup activity
             Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
             startActivity(intent);
             hideKeyBoard();
             finish();
         });
+
+        tvForgetPassword.setOnClickListener(v -> {
+            username = etUserName.getText().toString();
+
+            if (!TextUtils.isEmpty(username)) {
+                userNameIsExist(username);
+            } else {
+                etUserName.setError("用户名不能为空");
+            }
+        });
+    }
+
+    private void userNameIsExist(String username) {
+        BmobQuery<MyBmobUser> query = new BmobQuery<>();
+        query.addWhereEqualTo("username", username);
+        query.findObjects(this, new FindListener<MyBmobUser>() {
+            @Override
+            public void onSuccess(List<MyBmobUser> list) {
+                boolean flag = false;
+
+                for (MyBmobUser user : list) {
+                    if (user.getUsername().equals(username)) {
+                        Intent intent = new Intent(getApplicationContext(), ForgetPasswordActivity.class);
+                        intent.putExtra("username", username);
+                        startActivity(intent);
+                        hideKeyBoard();
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    etUserName.setError("该用户还没有注册");
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+            }
+        });
+
     }
 
     private void checkIsLogined() {
@@ -142,74 +178,9 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(LoginActivity.this, text, Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * 监听 checkbox 判断用户是否选择了记住密码和自动登录
-     */
-    private void setDefaultValue() {
-        rememberPasswordCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                username = userNameText.getText().toString();
-                password = passwordText.getText().toString();
-                // 判断输入框的值是否为空
-                if (TextUtils.isEmpty(username)) {
-                    userNameText.setError("用户名不能为空");
-                    rememberPasswordCb.setChecked(false);
-                } else if (TextUtils.isEmpty(password)) {
-                    passwordText.setError("密码不能为空");
-                    rememberPasswordCb.setChecked(false);
-                } else {
-                    rememberPasswordCb.setChecked(true);
-
-                    // 将 用户名和密码保存起来
-                    preferenceUtils.saveParam(ConstUtils.REMEMBER_PASSWORD, true);
-                    preferenceUtils.saveParam(ConstUtils.USER_NAME, username);
-                    preferenceUtils.saveParam(ConstUtils.PASSWORD, password);
-                }
-
-            } else {
-                rememberPasswordCb.setChecked(false);
-                preferenceUtils.saveParam(ConstUtils.REMEMBER_PASSWORD, false);
-                preferenceUtils.saveParam(ConstUtils.USER_NAME, "");
-                preferenceUtils.saveParam(ConstUtils.PASSWORD, "");
-            }
-        });
-        autoLoginCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                autoLoginCb.setChecked(true);
-                preferenceUtils.saveParam(ConstUtils.AUTO_LOGIN, true);
-            } else {
-                autoLoginCb.setChecked(false);
-                preferenceUtils.saveParam(ConstUtils.AUTO_LOGIN, false);
-            }
-        });
-    }
-
-    /**
-     * 获取用户的默认设置
-     */
-    private void getDefaultValue() {
-        boolean rememberPassword = preferenceUtils.getBooleanParam(ConstUtils.REMEMBER_PASSWORD, false);
-        // 如果选择了记住密码选项
-        if (rememberPassword) {
-            rememberPasswordCb.setChecked(true);
-            String userName = preferenceUtils.getStringParam(ConstUtils.USER_NAME, "");
-            String password = preferenceUtils.getStringParam(ConstUtils.PASSWORD, "");
-            userNameText.setText(userName);
-            passwordText.setText(password);
-
-            // 如果选择了自动登录选项
-            boolean autoLogin = preferenceUtils.getBooleanParam(ConstUtils.AUTO_LOGIN, false);
-            if (autoLogin) {
-                autoLoginCb.setChecked(true);
-                hideKeyBoard();
-                readyLogin();
-            }
-        }
-    }
-
     private void hideKeyBoard() {
-        KeyBoardUtils.hideKeyBoard(this, userNameText);
-        KeyBoardUtils.hideKeyBoard(this, passwordText);
+        KeyBoardUtils.hideKeyBoard(this, etUserName);
+        KeyBoardUtils.hideKeyBoard(this, etPassword);
     }
 
     /**
@@ -217,6 +188,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void initBmob() {
         Bmob.initialize(this, APPLICATION_ID);
+        BmobSMS.initialize(this, APPLICATION_ID);
     }
 
     /**
@@ -226,12 +198,12 @@ public class LoginActivity extends AppCompatActivity {
         // 显示正在加载
         showProgressWheel(true);
 
-        username = userNameText.getText().toString();
-        password = passwordText.getText().toString();
+        username = etUserName.getText().toString();
+        password = etPassword.getText().toString();
 
         // 检测网络是否连接
         if (!CheckNetStateUtil.netIsAvailable(this)) {
-            Toast.makeText(LoginActivity.this, "网络连接不可用", Toast.LENGTH_SHORT).show();
+            showToast("网络连接不可用");
             showProgressWheel(false);
             return;
         }
@@ -249,7 +221,6 @@ public class LoginActivity extends AppCompatActivity {
      * 登录
      */
     public void login() {
-
         BmobUser user = new BmobUser();
         user.setUsername(username);
         user.setPassword(password);
@@ -266,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(int i, String s) {
                 showProgressWheel(false);
-                Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                etPassword.setError("密码错误");
             }
         });
     }
@@ -282,12 +253,12 @@ public class LoginActivity extends AppCompatActivity {
      * 获取当前登录用户的信息
      */
     private void initUserInfo() {
-        final BmobUser[] bmobUser = new BmobUser[1];
-        BmobQuery<BmobUser> query = new BmobQuery<>();
+        final MyBmobUser[] bmobUser = new MyBmobUser[1];
+        BmobQuery<MyBmobUser> query = new BmobQuery<>();
         query.addWhereEqualTo("username", username);
-        query.findObjects(this, new FindListener<BmobUser>() {
+        query.findObjects(this, new FindListener<MyBmobUser>() {
             @Override
-            public void onSuccess(List<BmobUser> list) {
+            public void onSuccess(List<MyBmobUser> list) {
                 bmobUser[0] = list.get(0);
                 if (bmobUser[0] != null) {
                     FinalDb finalDb = App.getFinalDb();
@@ -308,7 +279,7 @@ public class LoginActivity extends AppCompatActivity {
                         // 将用户的信息保存起来。
                         User user = new User();
                         user.setUserId(bmobUser[0].getObjectId());
-                        user.setUserEmail(bmobUser[0].getEmail());
+                        user.setUserPhone(bmobUser[0].getUserPhone());
                         user.setUserName(username);
                         user.setSavePassword(password);
 
@@ -343,11 +314,11 @@ public class LoginActivity extends AppCompatActivity {
         boolean value = true;
 
         if (TextUtils.isEmpty(username)) {
-            userNameText.setError("用户名不能为空");
+            etUserName.setError("用户名不能为空");
             value = false;
         }
         if (TextUtils.isEmpty(password)) {
-            passwordText.setError("密码不能为空");
+            etPassword.setError("密码不能为空");
             value = false;
         }
         return value;
@@ -360,13 +331,13 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void checkUserName(final String name) {
 
-        BmobQuery<BmobUser> query = new BmobQuery<>();
+        BmobQuery<MyBmobUser> query = new BmobQuery<>();
         query.addWhereEqualTo("username", name);
-        query.findObjects(this, new FindListener<BmobUser>() {
+        query.findObjects(this, new FindListener<MyBmobUser>() {
             @Override
-            public void onSuccess(List<BmobUser> list) {
+            public void onSuccess(List<MyBmobUser> list) {
                 boolean isExist = false;
-                for (BmobUser user : list) {
+                for (MyBmobUser user : list) {
                     if (user.getUsername().equals(name)) {
                         isExist = true;
                         login();
@@ -375,7 +346,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (!isExist) {
                     showProgressWheel(false);
-                    showToast("请先注册再登录");
+                    etUserName.setError("请先注册再登录");
                 }
             }
 

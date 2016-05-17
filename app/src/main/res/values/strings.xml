@@ -23,16 +23,15 @@
     <string name="advice_feedback">Advice Feedback</string>
     <string name="give_favor">Give favor</string>
     <string name="sync">Sync</string>
-    <array name="drawer_content">
-        <item>Notes</item>
-        <item>Trash</item>
-    </array>
+
     <string name="note_log_text" formatted="false">%s\u0020:\u0020%s</string>
     <string name="edit">Edit</string>
     <string name="trash">Trash</string>
     <string name="delete">Delete</string>
     <string name="lock">Lock</string>
     <string name="unlock">UnLock</string>
+
+    <string name="forget_login_password">Retrieve Password</string>
 
     <string name="enter_password_hint">Please input password</string>
     <string name="enter_password_again_hint">Please input password again</string>

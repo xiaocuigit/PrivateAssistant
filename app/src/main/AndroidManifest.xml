@@ -116,7 +116,8 @@
             android:exported="true" />
 
         <activity android:name=".ui.activity.PayActivity" />
-        <activity android:name=".ui.activity.AboutActivity"></activity>
+        <activity android:name=".ui.activity.AboutActivity" />
+        <activity android:name=".ui.activity.ForgetPasswordActivity"></activity>
     </application>
 
 </manifest>

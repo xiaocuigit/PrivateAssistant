@@ -58,43 +58,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cb_remember_password"
+                <TextView
+                    android:id="@+id/tv_signup_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:clickable="true"
-                    android:text="记住密码" />
+                    android:text="新用户注册"
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatCheckBox
-                    android:id="@+id/cb_auto_login"
+                <TextView
+                    android:id="@+id/tv_forget_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:clickable="true"
-                    android:text="自动登录" />
+                    android:gravity="end"
+                    android:text="忘记密码?"
+                    android:textColor="@color/text_color_primary"
+                    android:textSize="16sp" />
+
             </LinearLayout>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_login"
-                android:background="@drawable/button_login_select"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="24dp"
-                android:padding="12dp"
-                android:text="登 录" />
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_signup"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/button_login_select"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:text="注 册" />
+                android:text="登 录"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
