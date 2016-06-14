@@ -271,8 +271,8 @@ public class SignupActivity extends AppCompatActivity {
         String passwordAgain = etPasswordAgain.getText().toString();
         String checkCode = etCheckCode.getText().toString();
 
-        if (TextUtils.isEmpty(username) || username.length() < 3) {
-            etUserName.setError("最少3个字符");
+        if (TextUtils.isEmpty(username) || username.length() < 2) {
+            etUserName.setError("最少2个字符");
             valid = false;
         }
 

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.assistant.App;
@@ -45,8 +46,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.et_phone_number)
-    EditText etPhoneNumber;
+    @Bind(R.id.tv_phone_number)
+    TextView tvPhoneNumber;
     @Bind(R.id.et_check_code)
     EditText etCheckCode;
     @Bind(R.id.btn_check_code)
@@ -74,31 +75,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
 
         parseIntent();
-
-        etPhoneNumber.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String number = s.toString();
-                if (number.matches("^1[3-8]\\d{9}$")) {
-                    btnCheckCode.setClickable(true);
-                    btnCheckCode.setTextColor(Color.BLACK);
-                } else {
-                    btnCheckCode.setClickable(false);
-                    btnCheckCode.setTextColor(Color.GRAY);
-                    etPhoneNumber.setError("手机号码不正确");
-                }
-            }
-        });
 
     }
 
@@ -128,8 +104,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         mPhoneNumber = user.getUserPhone();
                         mUserId = user.getObjectId();
                         if (!TextUtils.isEmpty(mPhoneNumber)) {
-                            etPhoneNumber.setText(mPhoneNumber);
-                            btnCheckCode.setClickable(true);
+                            tvPhoneNumber.setText(mPhoneNumber);
                         }
                         break;
                     }
@@ -157,7 +132,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_check_code:
-                String number = etPhoneNumber.getText().toString();
+                String number = tvPhoneNumber.getText().toString();
                 getCheckCode(number);
                 break;
             case R.id.btn_ok:
@@ -186,7 +161,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         String password = etResetPassword.getText().toString();
 
         MyBmobUser user = new MyBmobUser();
-        user.setUserPhone(mPhoneNumber);
         user.setPassword(password);
         user.update(this, mUserId, new UpdateListener() {
             @Override
@@ -218,13 +192,12 @@ public class ForgetPasswordActivity extends AppCompatActivity {
      */
     private void updateDataBase() {
         String password = etResetPassword.getText().toString();
-        String phoneNumber = etPhoneNumber.getText().toString();
+
         FinalDb finalDb = App.getFinalDb();
 
         List<User> userList = finalDb.findAll(User.class);
         for (User user : userList) {
             if (user.getUserId().equals(mUserId)) {
-                user.setUserPhone(phoneNumber);
                 user.setSavePassword(password);
                 finalDb.update(user);
                 showSuccessDialog();
@@ -235,7 +208,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     private void verifySmsCode() {
 
-        String phoneNumber = etPhoneNumber.getText().toString();
+        String phoneNumber = tvPhoneNumber.getText().toString();
         String smsCode = etCheckCode.getText().toString();
         BmobSMS.verifySmsCode(this, phoneNumber, smsCode, new VerifySMSCodeListener() {
             @Override
@@ -256,18 +229,12 @@ public class ForgetPasswordActivity extends AppCompatActivity {
      */
     private boolean validate() {
 
-        String phoneNumber = etPhoneNumber.getText().toString();
         String password = etResetPassword.getText().toString();
         String passwordAgain = etResetPasswordAgain.getText().toString();
         String smsCode = etCheckCode.getText().toString();
 
         boolean valid = true;
 
-        // 手机号码不能为空
-        if (TextUtils.isEmpty(phoneNumber)) {
-            etPhoneNumber.setError("手机号码不能为空");
-            valid = false;
-        }
         // 验证码不能为空
         if (TextUtils.isEmpty(smsCode)) {
             etCheckCode.setError("验证码不能为空");
@@ -306,21 +273,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void showNetUnAvailableDialog() {
-        AlertDialog.Builder builder = DialogUtils.makeDialogBuilderByTheme(this);
-        builder.setMessage("网络不可用，请连接网络后再使用");
-        builder.setPositiveButton(R.string.sure, (dialog, which) -> {
-            // 打开设置界面让用户设置网络
-            dialog.dismiss();
-        });
-        builder.show();
-    }
-
-    private void showToast(String text) {
-        Toast.makeText(ForgetPasswordActivity.this, text, Toast.LENGTH_LONG).show();
-    }
-
 
     class TimeCount extends CountDownTimer {
 
